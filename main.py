@@ -1,6 +1,19 @@
 import tkinter as tk
 from tkinter import filedialog
-import b30_reader,b30_generator,ast,SongInfoCon
+import b30_reader,b30_generator,ast,SongInfoCon,os
+
+def create_output_folder_if_not_exists():
+    current_directory = os.getcwd()
+    output_folder = "output"
+
+    output_folder_path = os.path.join(current_directory, output_folder)
+    if not os.path.exists(output_folder_path):
+        os.makedirs(output_folder_path)
+        print(f"Folder '{output_folder}' created in '{current_directory}'.")
+    else:
+        print(f"Folder '{output_folder}' already exists in '{current_directory}'.")
+
+create_output_folder_if_not_exists()
 
 selected = False
 global st3file
