@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog
-import b30_reader,b30_generator
+import b30_reader,b30_generator,ast
 
 selected = False
 global st3file
@@ -27,7 +27,11 @@ def modify_text(new_ptt):
     ptt_output.config(state="disabled")
 
 def generate():
-    b30.generate.generate()
+    with open("new_all_song.txt","r") as file:
+        content = file.read()
+        # print(ast.literal_eval(content))
+        data_dict = ast.literal_eval(content)
+    b30_generator.generate_image(data_dict)
 
 # 创建主窗口
 root = tk.Tk()
@@ -39,6 +43,7 @@ button_help = tk.Button(root, text="?", command=show_help)
 button_generate = tk.Button(root, text="生成b30成绩图", command=generate)
 button_select.grid(row=0, column=0, padx=10, pady=10)
 button_help.grid(row=0, column=1, padx=10, pady=10)
+button_generate.grid(row=1, column=3, padx=10, pady=10)
 
 #创建文本控件
 ptt_output = tk.Text(root, height=1, width=40)

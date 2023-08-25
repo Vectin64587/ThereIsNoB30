@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
-import datetime
+import datetime,ast
 
 def generate_image(data_dict):
     # 创建一个白色背景的图片
@@ -15,7 +15,7 @@ def generate_image(data_dict):
     font_small = ImageFont.truetype("arial.ttf", font_size_small)
 
     # 按单曲 PTT 大小降序排序字典项
-    sorted_data = sorted(data_dict.items(), key=lambda x: x[1][3], reverse=True)
+    sorted_data = sorted(data_dict.items(), key=lambda x: x[1][2], reverse=True)
 
     # 绘制每行的内容
     rows, cols = 5, 6
@@ -45,15 +45,14 @@ def generate_image(data_dict):
     image.save(output_filename)
 
 # 示例字典数据
-data_dict = {
-    "Group 1": [95, 9, 5.12, 965],
-    "Group 2": [82, 8, 4.85, 850],
-    "Group 3": [78, 7, 4.60, 820],
-    # ... 继续添加数据 ...
-    "Group 30": [67, 6, 4.30, 750]
-}
+# data_dict = {
+#     "Group 1": [95, 9, 5.12, 965],
+#     "Group 2": [82, 8, 4.85, 850],
+#     "Group 3": [78, 7, 4.60, 820],
+#     # ... 继续添加数据 ...
+#     "Group 30": [67, 6, 4.30, 750]
+# }
 
-# 调用函数生成图片
-generate_image(data_dict)
+
 
 

@@ -79,7 +79,8 @@ def start(st3):
 
     #降序排序pttList
     ptt_list.sort(reverse=True)
-
+    with open("all_song.txt","w") as f:
+        f.write(str(song_inf))
     #计算不探分最高ptt
 
     #计算不推分最高ptt
