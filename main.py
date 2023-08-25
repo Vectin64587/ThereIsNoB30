@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog
-import b30_reader,b30_generator,ast
+import b30_reader,b30_generator,ast,SongInfoCon
 
 selected = False
 global st3file
@@ -27,6 +27,13 @@ def modify_text(new_ptt):
     ptt_output.config(state="disabled")
 
 def generate():
+    with open("all_song.txt", 'r') as f:
+        content = f.read()
+    new_content = ast.literal_eval(content)
+    with open("new_all_song.txt", 'w') as f:
+        f.write(str(SongInfoCon.b30_generate(new_content)))
+        #print(SongInfoCon.b30_generate(new_content))
+
     with open("new_all_song.txt","r") as file:
         content = file.read()
         # print(ast.literal_eval(content))

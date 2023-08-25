@@ -11,9 +11,9 @@ def GetSongDiff(son_id,son_diff):
         # print(diff_temp/10)
         return diff_temp/10
 
-with open("all_song.txt", 'r') as f:
-    content = f.read()
-    print(content)
+# with open("all_song.txt", 'r') as f:
+#     content = f.read()
+    #print(content)
 def b30_generate(raw_data):
     # 合并多个字典为一个字典
     merged_dict = {}
@@ -36,7 +36,3 @@ def b30_generate(raw_data):
         result_dict[new_key] = [song_info['score'],GetSongDiff(song_name,diff),song_info['ptt']]
 
     return result_dict
-    new_content = ast.literal_eval(content)
-    with open("new_all_song.txt", 'w') as f:
-        f.write(str(b30_generate(new_content)))
-    print(b30_generate(new_content))
