@@ -1,5 +1,5 @@
 import sqlite3,tkinter
-from b30_generator import generate_image
+from decimal import Decimal
 
 
 #一些变量
@@ -37,7 +37,9 @@ def pttCal(son_id,son_diff,son_score):
         single_ptt = diff_temp + 1 + ((son_score-9800000)/20000)*0.1
     elif son_score < 9800000:
         single_ptt = diff_temp + ((son_score-9500000)/30000)*0.1
-    return single_ptt
+    single_ptt_t = Decimal(str(single_ptt)).quantize(Decimal("0.0001"), rounding = "ROUND_HALF_UP")
+    # print(single_ptt_t)
+    return single_ptt_t
 
 def start(st3):
 
@@ -66,19 +68,22 @@ def start(st3):
             song_score = line[2]
             song_diff = line[9]
 
-            #向ptt列表添加数据
-            ptt_list.append(pttCal(song_id,song_diff,song_score))
+            ptt = pttCal(song_id,song_diff,song_score)
 
+            #向ptt列表添加数据
+            ptt_list.append(float(ptt))
             #向song_inf写入曲目信息 键分别为三维难度 曲目id 元素包含分数与三维难度 ptt
-            song_inf[song_diff][song_id] = {"score":song_score,"diff":song_diff,"ptt":pttCal(song_id,song_diff,song_score)}
+            # print(ptt)
+            song_inf[int(song_diff)][song_id] = {"score":song_score,"diff":song_diff,"ptt": float(ptt)}
 
 
             # print(song_id+" "+str(song_score))  #输出曲目id及其分数
         else:
             break
-
+    # print(ptt_list)
     #降序排序pttList
     ptt_list.sort(reverse=True)
+    song_inf = [item for item in song_inf if item]
     with open("all_song.txt","w") as f:
         f.write(str(song_inf))
     #计算不探分最高ptt

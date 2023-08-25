@@ -35,7 +35,7 @@ def generate():
 
 # 创建主窗口
 root = tk.Tk()
-root.title("File Path Selector")
+root.title("B30 Generator")
 
 # 创建按钮并使用 grid() 放在左边
 button_select = tk.Button(root, text="选择st3", command=open_file_dialog)
